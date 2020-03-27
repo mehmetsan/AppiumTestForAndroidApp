@@ -39,7 +39,7 @@ for case in testCases:
 
     values = seperateWords(case)
 
-    problem = values[0]
+    problemDefinition = values[0]     #USED IN TESTING ONLY
     nameIn = values[1]
     surnameIn = values[2]
     birthDateIn = values[3]
@@ -53,7 +53,7 @@ for case in testCases:
     bDate.send_keys(birthDateIn)
     city.send_keys(cityIn)
     gender.click()
-    driver.implicitly_wait(2)   #WAIT FOR THE GENDERS TO APPEAR
+    driver.implicitly_wait(2)       #WAIT FOR THE GENDERS TO APPEAR
     if(genderIn == "Male"):
         genderSelect = driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[1]")
         genderSelect.click()
