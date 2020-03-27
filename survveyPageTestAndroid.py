@@ -1,23 +1,11 @@
 from appium import webdriver
 
-desired_cap={
-    "platformName": "Android",
-    "deviceName": "Android Emulator",
-    "appPackage": "",
-    "appWaitActivity": "",
-    "app": "C:\\Users\\MehmetSanisoglu\\Downloads\\SITE.apk"
-}
-driver = webdriver.Remote("http://localhost:4723/wd/hub",desired_cap)
-
-#INPUT VARIABLES FROM THE FILE
-nameIn = surnameIn = birthDateIn = cityIn = genderIn = occupationIn = ""
-
 #SIMPLE METHOD TO SEPERATE WORDS IN A LINE
 def seperateWords(line):
     listOfWords = []
     word = ""
     for each in line:
-        if(each == '/' and each != "\n"):
+        if(each == '+' and each != "\n"):
             listOfWords.append(word)
             word = ""
         else:
@@ -26,10 +14,29 @@ def seperateWords(line):
     listOfWords.append(word.replace('\n','')) #ADD THE LAST WORD
     return listOfWords
 
+
+desired_cap={
+    "platformName": "Android",
+    "deviceName": "Android Emulator",
+    "appPackage": "com.example.surveypage",
+    "appWaitActivity": "com.example.surveypage.MainActivity",
+    "app": "C:\\Users\\MehmetSanisoglu\\Downloads\\surveyApp.apk"
+}
+driver = webdriver.Remote("http://localhost:4723/wd/hub",desired_cap)
+
+#INPUT VARIABLES FROM THE FILE
+nameIn = surnameIn = birthDateIn = cityIn = genderIn = occupationIn = ""
 testCases = open("testCases.txt","r")
 
 #TEST EACH TEST CASE
 for case in testCases:
+    fName = driver.find_element_by_id("com.example.surveypage:id/name_text")
+    sName = driver.find_element_by_id("com.example.surveypage:id/surname_text")
+    bDate = driver.find_element_by_id("com.example.surveypage:id/date_text")
+    city = driver.find_element_by_id("com.example.surveypage:id/city_text")
+    gender = driver.find_element_by_id("com.example.surveypage:id/gender_spinner")
+    occupation = driver.find_element_by_id("com.example.surveypage:id/occ_text")
+
     values = seperateWords(case)
 
     problem = values[0]
@@ -40,28 +47,39 @@ for case in testCases:
     genderIn = values[5]
     occupationIn = values[6]
 
-
     # SEND KEYS
-    fName = driver.find_element_by_id()
-    fname.send_keys(nameIn)
-
-    sName = driver.find_element_by_id()
+    fName.send_keys(nameIn)
     sName.send_keys(surnameIn)
-
-    bDate = driver.find_element_by_id()
     bDate.send_keys(birthDateIn)
-
-    city = driver.find_element_by_id()
     city.send_keys(cityIn)
-
-    gender = driver.find_element_by_id()
-    gender.send_keys(genderIn)
-
-    occupation = driver.find_element_by_id()
+    gender.click()
+    driver.implicitly_wait(2)   #WAIT FOR THE GENDERS TO APPEAR
+    if(genderIn == "Male"):
+        genderSelect = driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[1]")
+        genderSelect.click()
+    elif(genderIn == "Female"):
+        genderSelect = driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[2]")
+        genderSelect.click()
+    else:
+        genderSelect = driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[3]")
+        genderSelect.click()
     occupation.send_keys(occupationIn)
 
 
-    driver.implicitly_wait(3)   #WAIT FOR THE SEND BUTTON TO APPEAR
+    driver.implicitly_wait(5)   #WAIT FOR THE SEND BUTTON TO APPEAR
 
-    send = driver.find_element_by_id()
-    send.click()
+    try:
+        send = driver.find_element_by_id("com.example.surveypage:id/send")
+        send.click()
+    except:
+        occupation.clear()
+        gender.click()
+        genderSelect = driver.find_element_by_xpath("/hierarchy/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.ListView/android.widget.CheckedTextView[1]")
+        genderSelect.click()
+        city.clear()
+        bDate.clear()
+        sName.clear()
+        fName.clear()
+
+
+    driver.implicitly_wait(4)   #WAIT FOR THE RESULT TO BE SEEN
