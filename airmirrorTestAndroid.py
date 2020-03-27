@@ -21,7 +21,7 @@ email.send_keys(("trabzonpower@gmail.com"))
 
 password = driver.find_element_by_id("com.sand.airmirror:id/etPwd")
 password = password.find_element_by_class_name("android.widget.EditText")
-password.send_keys("northern61")
+password.send_keys("deneme1234")
 
 btn = driver.find_element_by_id("com.sand.airmirror:id/btnLogin")
 btn.click()
@@ -31,3 +31,12 @@ driver.implicitly_wait(4)
 
 popUp = driver.find_element_by_id("com.sand.airmirror:id/tvCancel")
 popUp.click()
+
+
+driver.implicitly_wait(4)
+
+
+driver.back()
+driver.back()
+#actions : go, search, send, next, done, previous
+#driver.execute_script('mobile: performEditorAction', {'action': 'previous'})
