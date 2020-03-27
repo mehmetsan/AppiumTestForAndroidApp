@@ -1,0 +1,11 @@
+Date is invalid/John Smith/12.12.2500/Ankara/Male/Cook
+Name is invalid/xxx_Tentacion_xxx/Smith/12.12.1997/Boston/Male/Singer
+Name is invalid/6ix9ine/Johnson/12.12.1997/Boston/Male/Singer
+Surname is invalid/Dragon/$layer/12.12.1997/Boston/Male/Singer
+Surname is invalid/Dragon/$l4yer/12.12.1997/Boston/Male/Singer
+Empty field present/Diana/Smith/10.09.1988/Ankara/Female/
+City is invalid/John/Smith/12.12.1997/L.A./Male/Cook
+City is invalid/John/Smith/12.12.1997/Boston1234/Male/Cook
+Occupation is invalid/Diana/Smith/10.09.1988/Ankara/Male/H.R.
+Occupation is invalid/Diana/Smith/10.09.1988/Ankara/Male/H.R.
+Name and surname same/Smith/Smith/12.12.1997/Ankara/Male/Cook
