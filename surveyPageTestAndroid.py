@@ -1,4 +1,5 @@
 from appium import webdriver
+import os
 
 #SIMPLE METHOD TO SEPERATE WORDS IN A LINE
 def seperateWords(line):
@@ -14,13 +15,12 @@ def seperateWords(line):
     listOfWords.append(word.replace('\n','')) #ADD THE LAST WORD
     return listOfWords
 
-
 desired_cap={
     "platformName": "Android",
     "deviceName": "Android Emulator",
     "appPackage": "com.example.surveypage",
     "appWaitActivity": "com.example.surveypage.MainActivity",
-    "app": "C:\\Users\\MehmetSanisoglu\\Downloads\\surveyApp.apk"
+    "app": os.getcwd() + "\\surveyApp.apk"
 }
 driver = webdriver.Remote("http://localhost:4723/wd/hub",desired_cap)
 
