@@ -1,11 +1,13 @@
 from appium import webdriver
+import os
+
 
 desired_cap={
     "platformName": "Android",
     "deviceName": "Android Emulator",
     "appPackage": "com.sand.airmirror",
     "appWaitActivity": "com.sand.airmirror.ui.guide.GuideActivity_",
-    "app": "C:\\Users\\MehmetSanisoglu\\Downloads\\airmirror.apk"
+    "app": os.getcwd() + "\\airmirror.apk"
 }
 
 driver = webdriver.Remote("http://localhost:4723/wd/hub",desired_cap)
